@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.env
+instance/
+chroma_db/
+logs/
+data/uploaded_docs/
+*.db
+.venv/
+venv/
+.DS_Store
+*.egg-info/
