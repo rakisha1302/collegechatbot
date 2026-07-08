@@ -11,7 +11,7 @@ langchain-anthropic==0.1.23
 langchain-openai==0.1.25
 langchain-chroma==0.1.4
 langsmith==0.1.129
-chromadb==0.5.5
+chromadb>=0.5.4,<0.5.5
 anthropic==0.34.2
 openai==1.46.0
 pypdf==4.3.1
