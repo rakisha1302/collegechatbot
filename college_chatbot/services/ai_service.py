@@ -21,6 +21,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
 from config import config
 from services import prompts
@@ -29,7 +30,11 @@ from utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-SUPPORTED_PROVIDERS = {"claude", "openai"}
+SUPPORTED_PROVIDERS = {
+    "claude",
+    "openai",
+    "groq"
+}
 
 
 class AIProviderError(Exception):
@@ -54,6 +59,15 @@ def get_chat_model(provider: str, streaming: bool = False):
             max_tokens=1500,
             streaming=streaming,
         )
+    if provider == "groq":
+        if not config.GROQ_API_KEY:
+            raise AIProviderError("Groq API key is not configured.")
+        return ChatGroq(
+            model=config.GROQ_MODEL,
+            groq_api_key=config.GROQ_API_KEY,
+            temperature=0.3,
+            streaming=streaming,
+    )
 
     if provider == "openai":
         if not config.OPENAI_API_KEY:

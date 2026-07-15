@@ -52,13 +52,17 @@ def send_message():
     data = request.get_json(silent=True) or {}
     session_id = data.get("session_id")
     provider = (data.get("provider") or "claude").lower()
+
+    if provider == "chatgpt":
+        provider = "openai"
+
     message_text = sanitize_text_input(data.get("message", ""))
 
     if not session_id:
         return jsonify({"success": False, "error": "session_id is required."}), 400
     if not message_text:
         return jsonify({"success": False, "error": "Message cannot be empty."}), 400
-    if provider not in ("claude", "openai"):
+    if provider not in ("claude", "openai", "groq"):
         return jsonify({"success": False, "error": "Invalid AI provider selected."}), 400
 
     convo = _get_or_create_conversation(session_id, provider)
@@ -183,6 +187,11 @@ def regenerate_response():
     data = request.get_json(silent=True) or {}
     session_id = data.get("session_id")
     provider = (data.get("provider") or "claude").lower()
+    if provider not in ("claude", "openai", "groq"):
+        return jsonify({
+          "success": False,
+          "error": "Invalid AI provider selected."
+    }), 400
 
     convo = Conversation.query.filter_by(session_id=session_id).first()
     if not convo:

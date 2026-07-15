@@ -3,7 +3,7 @@
 const state = {
   sessionId: null,
   sessionIds: JSON.parse(localStorage.getItem('campusai_sessions') || '[]'),
-  provider: localStorage.getItem('campusai_provider') || 'claude',
+  provider: localStorage.getItem('campusai_provider') || 'groq',
   role: localStorage.getItem('campusai_role') || 'guest',
   isSending: false,
   recognition: null,

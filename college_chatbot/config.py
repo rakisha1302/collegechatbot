@@ -36,11 +36,14 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # AI Providers
+    
     ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-    ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-6")
-    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
+    GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
+    ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-3-5-sonnet-latest")
+    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
+    GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
     # LangSmith
     LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2", "false")
     LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY", "")
