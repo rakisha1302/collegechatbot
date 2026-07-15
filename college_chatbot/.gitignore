@@ -8,5 +8,6 @@ data/uploaded_docs/
 *.db
 .venv/
 venv/
+venv311/
 .DS_Store
 *.egg-info/
